@@ -20,5 +20,5 @@ export async function POST(request){
     //     createUser.password = undefined
     //     return NextResponse.json({"message":"Success","user":createUser})
     // }
-    return NextResponse.json({"message":"Something went wrong","email",email})
+    return NextResponse.json({"message":"Something went wrong","email":email})
 }
