@@ -14,5 +14,5 @@ export const signupSubmit = async(data)=>{
     body:JSON.stringify(bodydata)
 })
 let res = await a.json()
-return "Success"
+return res
 }
