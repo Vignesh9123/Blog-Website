@@ -7,7 +7,7 @@ export const signupSubmit = async(data)=>{
         "username":username,
         "password":password
     }
-    let a = await fetch("/api/user/signup",{method:"POST",
+    let a = await fetch("https://node-backend-henna.vercel.app/user/signup",{method:"POST",
     headers:{
         "Content-Type": "application/json"
     },
