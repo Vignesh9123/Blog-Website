@@ -261,7 +261,6 @@ export default function Home(context) {
   
 
   useEffect(() => {
-    dbConnect()
     setposts(pst)
    
   }, [])
