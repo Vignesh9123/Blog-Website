@@ -1,10 +1,12 @@
 "use client"
 import React from 'react'
 import { Button } from 'react-bootstrap';
-import { useRef } from 'react';
+import { useRef,useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Alert from 'react-bootstrap/Alert';
 
 const SigninComponent = () => {
+    const [show, setShow] = useState(true);
     const emailRef = useRef();
     const passwordRef = useRef();
 
@@ -18,6 +20,14 @@ const SigninComponent = () => {
 
     return (
         <div className="flex justify-center items-center h-screen">
+            {show && <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+            <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+            <p>
+              Change this and that and try again. Duis mollis, est non commodo
+              luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+              Cras mattis consectetur purus sit amet fermentum.
+            </p>
+          </Alert>}
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -52,9 +62,6 @@ const SigninComponent = () => {
                     >
                         Sign In
                     </button>
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
                 </div>
             </form>
         </div>
