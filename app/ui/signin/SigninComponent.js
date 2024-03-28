@@ -1,6 +1,8 @@
 "use client"
 import React from 'react'
+import { Button } from 'react-bootstrap';
 import { useRef } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const SigninComponent = () => {
     const emailRef = useRef();
@@ -10,7 +12,7 @@ const SigninComponent = () => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        let body = {email,password}
+        let body = { email, password }
         console.log(body);
     };
 
@@ -50,6 +52,9 @@ const SigninComponent = () => {
                     >
                         Sign In
                     </button>
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
                 </div>
             </form>
         </div>
