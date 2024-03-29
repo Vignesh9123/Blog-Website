@@ -73,7 +73,7 @@ const SignUp = () => {
              <input id="passinput" name="password" type="password" {...register("password")} className="w-fit p-3 border-2 text-md outline-blue-300 outline-4" placeholder="Enter your Password" />
         </div> 
         <div>
-           {loading ? <Loading/>:<button type="submit" className="p-2 text-lg px-6 rounded-lg bg-gray-800 text-white">Submit</button>}
+           {loading ? <Loading/>:<button type="submit" className="p-2 text-lg px-6 rounded-lg bg-gray-800 text-white">Sign Up</button>}
         </div>
         </div>
       </form>
