@@ -3,9 +3,10 @@ import React from 'react'
 import { Button } from 'react-bootstrap';
 import { useRef,useState } from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css'
-import Alert from 'react-bootstrap/Alert';
+// import Alert from 'react-bootstrap/Alert';
 import signinSubmit from '@/app/actions/signinSubmit';
 import Link from 'next/link';
+import ClosingAlert from './Alert';
 
 const SigninComponent = () => {
     const [invalidcreds, setInvalidcreds] = useState(false);
@@ -49,23 +50,15 @@ const SigninComponent = () => {
     };
 
     return (<>
-            {invalidcreds && <Alert variant="danger" onClose={() => setInvalidcreds(false)} dismissible>
-            <Alert.Heading>Invalid credentials, please check email and password.</Alert.Heading>
-          </Alert>}
+            {invalidcreds && <ClosingAlert/> }
           {
-            success && <Alert variant="success" onClose={() => setSuccess(false)} dismissible>
-            <Alert.Heading>Success</Alert.Heading>
-          </Alert>
+            success && <ClosingAlert/>
           }
           {
-            error &&  <Alert variant="danger" onClose={() => setError(false)} dismissible>
-            <Alert.Heading>Some error occured, please try again</Alert.Heading>
-          </Alert>
+            error &&  <ClosingAlert/>
           }
           {
-            notExists && <Alert variant="danger" onClose={() => setNotExists(false)} dismissible>
-            <Alert.Heading>User does not exist, Please <Link href="/user/signup">sign up.</Link> </Alert.Heading>
-          </Alert>
+            notExists && <ClosingAlert/>
           }
         <div className="flex justify-center items-center h-screen">
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
