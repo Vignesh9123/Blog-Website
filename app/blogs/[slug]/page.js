@@ -261,7 +261,7 @@ export default function page({params}){
   setValue("postId", searchedPost[0].id);
   
   useEffect(()=>{
-    fetch(`node-backend-henna.vercel.app/comments/${searchedPost[0].id}`)
+    fetch(`https://node-backend-henna.vercel.app/comments/${searchedPost[0].id}`)
     .then((res) => res.json())
     .then((data) => {
       setCommentsforpost(data.comments)})
