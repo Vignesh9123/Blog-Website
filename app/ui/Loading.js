@@ -1,7 +1,7 @@
 export const CommentsShimmer = ()=>{
   return(
    <> 
-<div role="status" class="w-full p-4 space-y-4  animate-pulse">
+<div role="status" class="w-full max-h-screen p-4 space-y-4  animate-pulse">
     <div class="flex items-center justify-between">
         <div>
             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
