@@ -6,8 +6,10 @@ import { useRef,useState } from 'react';
 // import Alert from 'react-bootstrap/Alert';
 import signinSubmit from '@/app/actions/signinSubmit';
 import Link from 'next/link';
-import ClosingAlert from './Alert';
-
+import SuccessAlert from './SuccessAlert';
+import InvalidCreds from './InvalidCreds';
+import SignInError from './SignInError';
+import NotExists from './NotExists';
 const SigninComponent = () => {
     const [invalidcreds, setInvalidcreds] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -50,15 +52,15 @@ const SigninComponent = () => {
     };
 
     return (<>
-            {invalidcreds && <ClosingAlert/> }
+            {invalidcreds && <InvalidCreds/> }
           {
-            success && <ClosingAlert/>
+            success && <SuccessAlert/>
           }
           {
-            error &&  <ClosingAlert/>
+            error &&  <SignInError/>
           }
           {
-            notExists && <ClosingAlert/>
+            notExists && <NotExists/>
           }
         <div className="flex justify-center items-center h-screen">
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">

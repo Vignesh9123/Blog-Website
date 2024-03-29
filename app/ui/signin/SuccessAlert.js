@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
-const Alert = ({ color }) => {
+import Link from "next/link";
+const Alert = () => {
   const [showAlert, setShowAlert] = useState(true);
   return (
     <>
@@ -14,8 +14,7 @@ const Alert = ({ color }) => {
             <i className="fas fa-bell" />
           </span>
           <span className="inline-block align-middle mr-8">
-            <b className="capitalize">Success</b> This is a Success alert -
-            check it out!
+            <b className="capitalize">Signed In succesfully</b> Return to <Link className="underline" href="/">Home</Link>
           </span>
           <button
             className="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none"
@@ -29,7 +28,7 @@ const Alert = ({ color }) => {
   );
 };
 
-export default function ClosingAlert() {
+export default function SuccessAlert() {
   return (
     <>
        <Alert/>;
