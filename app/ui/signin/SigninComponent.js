@@ -25,12 +25,12 @@ const SigninComponent = () => {
     };
 
     return (<>
-            {show && <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+            {invalidcreds && <Alert variant="danger" onClose={() => setShow(false)} dismissible>
             <Alert.Heading>Invalid credentials, please check email and password.</Alert.Heading>
           </Alert>}
           {
             success && <Alert variant="success" onClose={() => setShow(false)} dismissible>
-            <Alert.Heading>Invalid credentials, please check email and password.</Alert.Heading>
+            <Alert.Heading>Success</Alert.Heading>
           </Alert>
           }
         <div className="flex justify-center items-center h-screen">
