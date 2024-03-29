@@ -3,7 +3,7 @@ export default async function signinSubmit(data){
     headers:{
         "Content-Type": "application/json"
     },
-    body:JSON.stringify(bodydata)})
+    body:JSON.stringify(data)})
     let  res = await a.json()
     return res.message 
 }
