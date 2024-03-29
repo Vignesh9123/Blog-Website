@@ -5,10 +5,13 @@ import { useRef,useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Alert from 'react-bootstrap/Alert';
 import signinSubmit from '@/app/actions/signinSubmit';
+import Link from 'next/link';
 
 const SigninComponent = () => {
     const [invalidcreds, setInvalidcreds] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(false)
+    const [notExists, setNotExists] = useState(false)
     const emailRef = useRef();
     const passwordRef = useRef();
 
@@ -21,16 +24,47 @@ const SigninComponent = () => {
         if(res == "Success"){
             setInvalidcreds(false)
             setSuccess(true)
+            setError(false)
+            setNotExists(false)
+        }
+        else if(res == "Invalid credentials"){
+            setInvalidcreds(true)
+            setSuccess(false)
+            setError(false)
+            setNotExists(false)
+        }
+        else if(res == "User does not exist"){
+            setInvalidcreds(false)
+            setSuccess(false)
+            setError(false)
+            setNotExists(true)
+        }
+        else{
+            setInvalidcreds(false)
+            setSuccess(false)
+            setError(true)
+            setNotExists(false)
+
         }
     };
 
     return (<>
-            {invalidcreds && <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+            {invalidcreds && <Alert variant="danger" onClose={() => setInvalidcreds(false)} dismissible>
             <Alert.Heading>Invalid credentials, please check email and password.</Alert.Heading>
           </Alert>}
           {
-            success && <Alert variant="success" onClose={() => setShow(false)} dismissible>
+            success && <Alert variant="success" onClose={() => setSuccess(false)} dismissible>
             <Alert.Heading>Success</Alert.Heading>
+          </Alert>
+          }
+          {
+            error &&  <Alert variant="danger" onClose={() => setError(false)} dismissible>
+            <Alert.Heading>Some error occured, please try again</Alert.Heading>
+          </Alert>
+          }
+          {
+            notExists && <Alert variant="danger" onClose={() => setNotExists(false)} dismissible>
+            <Alert.Heading>User does not exist, Please <Link href="/user/signup">sign up.</Link> </Alert.Heading>
           </Alert>
           }
         <div className="flex justify-center items-center h-screen">
