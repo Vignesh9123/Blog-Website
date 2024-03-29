@@ -2,7 +2,7 @@
 import React from 'react'
 import { Button } from 'react-bootstrap';
 import { useRef,useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 import Alert from 'react-bootstrap/Alert';
 import signinSubmit from '@/app/actions/signinSubmit';
 import Link from 'next/link';
