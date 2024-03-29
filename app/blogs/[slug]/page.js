@@ -7,7 +7,7 @@ import React, { useState,useEffect } from "react";
 import { FormEvent } from 'react'
 import { useForm } from "react-hook-form";
 import { onSubmit } from "@/app/actions/commentSubmit";
-import Loading from "@/app/ui/Loading";
+import { CommentsShimmer } from "@/app/ui/Loading";
 const posts = [
   {
     "id": 1,
@@ -275,7 +275,7 @@ export default function page({params}){
     <div>Author: {searchedPost[0].author}</div>
     <div className="m-5">    
     <div className="text-lg font-bold mt-10 mb-3">Comments:</div>
-    {(commentsforpost==undefined)||(commentsforpost.length==0)?loading?<Loading/>:<div>No comments</div>:""}
+    {(commentsforpost==undefined)||(commentsforpost.length==0)?loading?<CommentsShimmer/>:<div>No comments</div>:""}
     {commentsforpost&&commentsforpost.map(comment=>{
       return(
         <div key={comment.id} className="flex border-2 justify-between w-full items-center px-5">
