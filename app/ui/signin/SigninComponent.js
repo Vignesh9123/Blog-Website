@@ -4,29 +4,35 @@ import { Button } from 'react-bootstrap';
 import { useRef,useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Alert from 'react-bootstrap/Alert';
+import signinSubmit from '@/app/actions/signinSubmit';
 
 const SigninComponent = () => {
-    const [show, setShow] = useState(true);
+    const [invalidcreds, setInvalidcreds] = useState(false);
+    const [success, setSuccess] = useState(false);
     const emailRef = useRef();
     const passwordRef = useRef();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         let body = { email, password }
-        console.log(body);
+        let res = await signinSubmit(body)
+        if(res == "Success"){
+            setInvalidcreds(false)
+            setSuccess(true)
+        }
     };
 
     return (<>
             {show && <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-            <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-            <p>
-              Change this and that and try again. Duis mollis, est non commodo
-              luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-              Cras mattis consectetur purus sit amet fermentum.
-            </p>
+            <Alert.Heading>Invalid credentials, please check email and password.</Alert.Heading>
           </Alert>}
+          {
+            success && <Alert variant="success" onClose={() => setShow(false)} dismissible>
+            <Alert.Heading>Invalid credentials, please check email and password.</Alert.Heading>
+          </Alert>
+          }
         <div className="flex justify-center items-center h-screen">
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
