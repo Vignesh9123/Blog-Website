@@ -1,29 +1,32 @@
 "use client"
 import React from 'react'
-import { Button } from 'react-bootstrap';
 import { useRef,useState } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css'
-// import Alert from 'react-bootstrap/Alert';
+
 import signinSubmit from '@/app/actions/signinSubmit';
 import Link from 'next/link';
 import SuccessAlert from './SuccessAlert';
 import InvalidCreds from './InvalidCreds';
 import SignInError from './SignInError';
 import NotExists from './NotExists';
+import Loading from '../Loading';
 const SigninComponent = () => {
     const [invalidcreds, setInvalidcreds] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false)
     const [notExists, setNotExists] = useState(false)
+    const [loading, setLoading] = useState(false)
+
     const emailRef = useRef();
     const passwordRef = useRef();
 
     const handleSubmit = async(event) => {
+        setLoading(true)
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         let body = { email, password }
         let res = await signinSubmit(body)
+        setLoading(false)
         if(res == "Success"){
             setInvalidcreds(false)
             setSuccess(true)
@@ -90,14 +93,14 @@ const SigninComponent = () => {
                         required
                     />
                 </div>
-                <div className="flex items-center justify-between">
-                    <button
-                        className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="submit"
-                    >
-                        Sign In
-                    </button>
-                </div>
+        {loading?<Loading/>:<div className="flex items-center justify-between">
+            <button
+                className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+            >
+                Sign In
+            </button>
+        </div>}
             </form>
         </div>
         </>
