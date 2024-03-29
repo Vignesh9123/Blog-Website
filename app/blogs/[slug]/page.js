@@ -8,7 +8,6 @@ import { FormEvent } from 'react'
 import { useForm } from "react-hook-form";
 import { onSubmit } from "@/app/actions/commentSubmit";
 import { CommentsShimmer } from "@/app/ui/Loading";
-import { useEffect } from "react";
 import { fetchPostbyId } from "@/app/actions/fetchPosts";
 const posts = [
   {
