@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Alert = ({ color }) => {
-  const [showAlert, setShowAlert] = React.useState(true);
+  const [showAlert, setShowAlert] = useState(true);
   return (
     <>
       {showAlert ? (
@@ -34,7 +34,7 @@ const Alert = ({ color }) => {
 export default function ClosingAlert() {
   return (
     <>
-      return <Alert color="green" />;
+       <Alert color="green" />;
     </>
   );
 }
