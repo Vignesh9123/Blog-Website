@@ -7,10 +7,11 @@ import ArrowUp from "./ui/ArrowUpScroll";
 import dbConnect from "./actions/dbConnect";
 import fetchPosts from "./actions/fetchPosts";
   
-const pst = fetchPosts
+
+let blogpsts =[];
 export default function Home(context) {
   const [nofp, setnofp] = useState(4)
-  const [posts, setposts] = useState(pst)
+  const [posts, setposts] = useState([])
   const nref = useRef(null)
   const pageNumber = parseInt(context.searchParams.page) || 1
   const [page, setPage] = useState(pageNumber)
@@ -20,12 +21,14 @@ export default function Home(context) {
   
 
   useEffect(() => {
-    setposts(pst)
+    (async()=>{
+    blogpsts = await fetchPosts()
+    setposts(blogpsts)})()
    
   }, [])
 
   useEffect(() => {
-    const filteredResults = pst.filter(item =>
+    const filteredResults = blogpsts.filter(item =>
       item.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setposts(filteredResults);
