@@ -6,17 +6,21 @@ import EmailExists from "./signup/EmailExists"
 import LoggedIn from "./signup/LoggedIn"
 import UsnExists from "./signup/UsnExists"
 import ServerError from "./signup/ServerError"
+import Loading from "./Loading"
 const SignUp = () => {
    const {handleSubmit, register} = useForm()
   const [loggedIn, setLoggedIn] = useState(false)
   const [emailExists, setEmailExists] = useState(false)
   const [usnExists, setUsnExists] = useState(false)
   const [serverError, setServerError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const formRef = useRef(null)
   const createAccount = async(e)=>{
+    setLoading(true)
     let res  = await signupSubmit(e)
     formRef.current.reset()
+    setLoading(false)
     if(res == "Success"){
       setUsnExists(false)
       setEmailExists(false)
@@ -65,7 +69,7 @@ const SignUp = () => {
              <input id="passinput" name="password" type="password" {...register("password")} className="w-fit p-3 border-2 text-md outline-blue-300 outline-4" placeholder="Enter your Password" />
         </div> 
         <div>
-            <button type="submit" className="p-2 text-lg px-6 rounded-lg bg-gray-800 text-white">Submit</button>
+           {loading ? <Loading/>:<button type="submit" className="p-2 text-lg px-6 rounded-lg bg-gray-800 text-white">Submit</button>}
         </div>
         </div>
       </form>
