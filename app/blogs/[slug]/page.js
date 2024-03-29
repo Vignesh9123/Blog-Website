@@ -257,9 +257,12 @@ export default function page({params}){
   const [commentsforpost, setCommentsforpost] = useState()
   const [loading, setLoading] = useState(false)
   let id = params.slug
+  let searchedPost;
+  useEffect(() => {
+   (async()=>{searchedPost = await fetchPostbyId(id)})()
+  }, [])
   
-  let searchedPost = fetchPostbyId(id)
-console.log(searchedPost);
+  
   if(!searchedPost) return<>No such Post</>
   setValue("postId", searchedPost.id);
   
