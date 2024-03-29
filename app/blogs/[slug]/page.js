@@ -259,6 +259,7 @@ export default function page({params}){
   let id = params.slug
   
   let searchedPost = fetchPostbyId(id)
+console.log(searchedPost);
   if(!searchedPost) return<>No such Post</>
   setValue("postId", searchedPost.id);
   
