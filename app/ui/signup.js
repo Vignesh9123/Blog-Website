@@ -17,6 +17,10 @@ const SignUp = () => {
 
   const formRef = useRef(null)
   const createAccount = async(e)=>{
+    setUsnExists(false)
+    setEmailExists(false)
+    setLoggedIn(false)
+    setServerError(false)
     setLoading(true)
     let res  = await signupSubmit(e)
     formRef.current.reset()
