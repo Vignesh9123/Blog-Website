@@ -7,7 +7,7 @@ import React, { useState,useEffect } from "react";
 import { FormEvent } from 'react'
 import { useForm } from "react-hook-form";
 import { onSubmit } from "@/app/actions/commentSubmit";
-
+import Loading from "@/app/ui/Loading";
 const posts = [
   {
     "id": 1,
@@ -254,6 +254,7 @@ const posts = [
 export default function page({params}){
   const {register,handleSubmit,setValue} = useForm()
   const [commentsforpost, setCommentsforpost] = useState()
+  const [loading, setLoading] = useState(false)
   let title = decodeURI(params.slug)
   
   let searchedPost = posts.filter(post=>post.title == title)
@@ -261,9 +262,11 @@ export default function page({params}){
   setValue("postId", searchedPost[0].id);
   
   useEffect(()=>{
+    setLoading(true)
     fetch(`https://node-backend-henna.vercel.app/comments/${searchedPost[0].id}`)
     .then((res) => res.json())
     .then((data) => {
+      setLoading(false)
       setCommentsforpost(data.comments)})
   },[])
     
@@ -272,7 +275,7 @@ export default function page({params}){
     <div>Author: {searchedPost[0].author}</div>
     <div className="m-5">    
     <div className="text-lg font-bold mt-10 mb-3">Comments:</div>
-    {(commentsforpost==undefined)||(commentsforpost.length==0)?<div>No Comments</div>:""}
+    {(commentsforpost==undefined)||(commentsforpost.length==0)?`${loading?<Loading/>:<div>No Comments</div>}`:""}
     {commentsforpost&&commentsforpost.map(comment=>{
       return(
         <div key={comment.id} className="flex border-2 justify-between w-full items-center px-5">
