@@ -8,6 +8,8 @@ import { FormEvent } from 'react'
 import { useForm } from "react-hook-form";
 import { onSubmit } from "@/app/actions/commentSubmit";
 import { CommentsShimmer } from "@/app/ui/Loading";
+import { useEffect } from "react";
+import { fetchPostbyId } from "@/app/actions/fetchPosts";
 const posts = [
   {
     "id": 1,
@@ -255,15 +257,15 @@ export default function page({params}){
   const {register,handleSubmit,setValue} = useForm()
   const [commentsforpost, setCommentsforpost] = useState()
   const [loading, setLoading] = useState(false)
-  let title = decodeURI(params.slug)
+  let id = params.slug
   
-  let searchedPost = posts.filter(post=>post.title == title)
-  if(!searchedPost[0]) return<>No such Post</>
-  setValue("postId", searchedPost[0].id);
+  let searchedPost = fetchPostbyId(id)
+  if(!searchedPost) return<>No such Post</>
+  setValue("postId", searchedPost.id);
   
   useEffect(()=>{
     setLoading(true)
-    fetch(`https://node-backend-henna.vercel.app/comments/${searchedPost[0].id}`)
+    fetch(`https://node-backend-henna.vercel.app/comments/${searchedPost.id}`)
     .then((res) => res.json())
     .then((data) => {
       setLoading(false)
@@ -271,8 +273,8 @@ export default function page({params}){
   },[])
     
     return (<>
-    <div>Post: {searchedPost[0].title}</div>
-    <div>Author: {searchedPost[0].author}</div>
+    <div>Post: {searchedPost.title}</div>
+    <div>Author: {searchedPost.author}</div>
     <div className="m-5">    
     <div className="text-lg font-bold mt-10 mb-3">Comments:</div>
     {(commentsforpost==undefined)||(commentsforpost.length==0)?loading?<CommentsShimmer/>:<div>No comments</div>:""}
