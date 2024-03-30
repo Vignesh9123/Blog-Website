@@ -6,7 +6,7 @@ const ServerError = () => {
   useEffect(() => {
     setInterval(() => {
       setTime((prev) => Math.min(prev + 0.1, 100));
-    }, 10);
+    }, 5);
   }, [])
   return (
     <div>
