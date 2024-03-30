@@ -7,7 +7,7 @@ const LoggedIn = () => {
   const [time, setTime] = useState(0)
   useEffect(() => {
     setInterval(() => {
-      setTime((prev) => Math.min(prev + 0.1, 100));
+      setTime((prev) => Math.min(prev + 1, 100));
     }, 10);
   }, [])
   return (
