@@ -1,7 +1,7 @@
 "use client"
 import { useForm } from "react-hook-form"
 import { signupSubmit } from "../actions/signupSubmit"
-import { useState,useRef } from "react"
+import { useState,useRef,useEffect } from "react"
 import EmailExists from "./signup/EmailExists"
 import LoggedIn from "./signup/LoggedIn"
 import UsnExists from "./signup/UsnExists"
@@ -15,6 +15,41 @@ const SignUp = () => {
   const [serverError, setServerError] = useState(false)
   const [loading, setLoading] = useState(false)
 
+const awaitDelay = ()=>{
+    return new Promise(resolve=>{
+      setTimeout(() => {
+        resolve()
+      }, 5000);
+    })
+  }
+  useEffect(() => {
+    if(loggedIn == true){
+     (async()=>{await awaitDelay()
+       setLoggedIn(false)
+     })()
+    }
+   }, [loggedIn])
+  useEffect(() => {
+    if(emailExists == true){
+     (async()=>{await awaitDelay()
+       setEmailExists(false)
+     })()
+    }
+   }, [emailExists])
+  useEffect(() => {
+    if(usnExists == true){
+     (async()=>{await awaitDelay()
+       setUsnExists(false)
+     })()
+    }
+   }, [usnExists])
+  useEffect(() => {
+    if(serverError == true){
+     (async()=>{await awaitDelay()
+       setServerError(false)
+     })()
+    }
+   }, [serverError])
   const formRef = useRef(null)
   const createAccount = async(e)=>{
     setUsnExists(false)
