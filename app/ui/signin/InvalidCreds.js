@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 const Alert = () => {
   const [showAlert, setShowAlert] = useState(true);
+  const [time, setTime] = useState(0)
+  useEffect(() => {
+    setInterval(() => {
+      setTime((prev) => Math.min(prev + 0.1, 100));
+    }, 5);
+  }, [])
   return (
     <>
       {showAlert ? (
@@ -10,6 +16,7 @@ const Alert = () => {
             "text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500"
           }
         >
+          <div className="h-[5px] bg-red-400 rounded-t-md" style={{width:`${time}%`}}></div>
           <span className="text-xl inline-block mr-5 align-middle">
             <i className="fas fa-bell" />
           </span>
