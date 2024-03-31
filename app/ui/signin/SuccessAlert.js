@@ -6,7 +6,7 @@ const Alert = () => {
   useEffect(() => {
     setInterval(() => {
       setTime((prev) => Math.min(prev + 0.1, 100));
-    }, 5);
+    }, 10);
   }, [])
   return (
     <>
