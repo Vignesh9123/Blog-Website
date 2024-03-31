@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { useRef,useState,useEffect } from 'react';
+import { useRef,useState } from 'react';
 
 import signinSubmit from '@/app/actions/signinSubmit';
 import Link from 'next/link';
@@ -15,46 +15,9 @@ const SigninComponent = () => {
     const [error, setError] = useState(false)
     const [notExists, setNotExists] = useState(false)
     const [loading, setLoading] = useState(false)
-    
-    const awaitDelay = ()=>{
-        return new Promise(resolve=>{
-          setTimeout(() => {
-            resolve()
-          }, 5000);
-        })
-      }
-    
+
     const emailRef = useRef();
     const passwordRef = useRef();
-    
-    useEffect(() => {
-        if(success == true){
-         (async()=>{await awaitDelay()
-           setSuccess(false)
-         })()
-        }
-       }, [success])
-    useEffect(() => {
-        if(notExists == true){
-         (async()=>{await awaitDelay()
-           setNotExists(false)
-         })()
-        }
-       }, [notExists])
-    useEffect(() => {
-        if(invalidcreds == true){
-         (async()=>{await awaitDelay()
-           setInvalidcreds(false)
-         })()
-        }
-       }, [invalidcreds])
-    useEffect(() => {
-        if(error == true){
-         (async()=>{await awaitDelay()
-           setError(false)
-         })()
-        }
-       }, [error])
 
     const handleSubmit = async(event) => {
         setLoading(true)
